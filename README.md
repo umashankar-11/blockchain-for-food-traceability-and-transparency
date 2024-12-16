@@ -33,3 +33,7 @@ To run the Blockchain for Food Traceability system, follow these steps:
    ```bash
    git clone https://github.com?umashankar-11/blockchain.py
    cd blockchain-food-traceability
+
+
+### Output Screenshots
+![Alt text] (C:\Users\dell\Desktop>screenshot-blockchain-py)

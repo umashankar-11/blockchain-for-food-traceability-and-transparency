@@ -36,5 +36,5 @@ To run the Blockchain for Food Traceability system, follow these steps:
 
 
 ### Output Screenshots
-![ScreenShot of code](C:\Users\dell\Desktop>screenshot-blockchain-py.jpeg)
+![ScreenShot of code](screenshot-blockchain-py.jpeg)
 

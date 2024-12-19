@@ -62,7 +62,7 @@ class Blockchain:
             return food_item
     print("Food item not found in the blockchain.")
 
-# ---------------------------
+
 
 
 class Robot:
@@ -79,7 +79,7 @@ class Robot:
         print(f"Robot Action: {robot_action}")
         return robot_action
 
-# ---------------------------
+
 
 
 class QualityCheck:

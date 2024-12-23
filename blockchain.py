@@ -25,7 +25,7 @@ class Blockchain:
         self.create_genesis_block()
 
     def create_genesis_block(self):
-        # The first block has index 0 and arbitrary previous hash
+        
         genesis_block = Block(0, "Genesis Block", "No Robot Action", time.time(), "0")
         self.chain.append(genesis_block)
 
@@ -40,7 +40,7 @@ class Blockchain:
         self.store_block_data(new_block)
 
     def store_block_data(self, block):
-        """Save block data to a file for traceability."""
+       
         filename = "block_data.txt"
         with open(filename, 'a') as file:
             file.write(f"Block Index: {block.index}\n")
@@ -54,16 +54,13 @@ class Blockchain:
         return self.chain[-1]
 
     def trace_food_item(self, food_item_id):
-        """Trace a food item in the blockchain."""
+       
         for block in self.chain:
             for food_item in block.food_item:
              if food_item[id] == food_item_id:
                 print(f"Found in Block {block.index}: {food_item}, Robot Action: {food_item['robot_action']}")
             return food_item
     print("Food item not found in the blockchain.")
-
-
-
 
 class Robot:
     def __init__(self, robot_id, task, location="Unknown"):
@@ -72,26 +69,22 @@ class Robot:
         self.location = location  
 
     def perform_task(self, food_item, action_details):
-        """Simulate the robot performing a task and checking food quality."""
+        
         self.location = action_details.get('location', "Unknown")
         robot_action = f"Robot {self.robot_id} performed {self.task} at {self.location}."
         food_item['robot_action'] = robot_action
         print(f"Robot Action: {robot_action}")
         return robot_action
 
-
-
-
 class QualityCheck:
     def __init__(self):
-        # Simulate a basic ML model for food quality check
+       
         self.model = {"Apple": "Good", "Banana": "Average", "Orange": "Poor"}
 
     def check_quality(self, food_type):
-        """Check food quality using a predefined ML model."""
+        
         quality = self.model.get(food_type, "Unknown")
         return quality
-
 
 
 class FoodTraceability:
@@ -151,7 +144,7 @@ class FoodTraceability:
         self.blockchain.add_food_transaction(food_item, "No Robot Action")
 
     def log_robot_action(self, robot, food_item_id, action_details):
-        """Log the robot's action into the blockchain"""
+        
         if food_item_id not in self.food_registry:
             print("Food item not found!")
             return
@@ -160,7 +153,7 @@ class FoodTraceability:
         self.blockchain.add_food_transaction(food_item, robot_action)
 
     def generate_report(self):
-        """Generate a report of all food items and their traceability."""
+        
         print("\nGenerating Food Traceability Report...")
         for food_item_id, food_item in self.food_registry.items():
             print(f"Food Item ID: {food_item_id}")
@@ -173,12 +166,12 @@ class FoodTraceability:
             print(f"Last Robot Action: {food_item['robot_action']}\n")
 
     def send_alert(self, message):
-        """Send an alert."""
+       
         self.alerts.append(message)
         print(f"ALERT: {message}")
 
     def display_food_item_info(self, food_item_id):
-        """Display all information related to a food item."""
+       
         if food_item_id not in self.food_registry:
             print("Food item not found!")
             return
@@ -186,11 +179,10 @@ class FoodTraceability:
         print(f"Food Item {food_item_id}: {json.dumps(food_item, indent=4)}")
 
     def validate_integrity(self):
-        """Check the integrity of the blockchain."""
+        
         for i in range(1, len(self.blockchain.chain)):
             current_block = self.blockchain.chain[i]
             previous_block = self.blockchain.chain[i - 1]
-
             
             if current_block.previous_hash != previous_block.hash:
                 self.send_alert("Blockchain integrity compromised!")
@@ -199,48 +191,36 @@ class FoodTraceability:
         print("Blockchain integrity verified.")
         return True
 
-
 def main():
     food_system = FoodTraceability()
 
-   
     food_system.register_food_item("001", "Farm A", "Apple", ["Organic"], "2025-12-31", {"Calories": 95, "Carbs": 25, "Fiber": 4.5})
     food_system.register_food_item("002", "Farm B", "Banana", ["Fair Trade", "Organic"], "2025-07-15", {"Calories": 105, "Carbs": 27, "Fiber": 3.1})
-
-    
+   
     food_system.process_food_item("001", "Processing Plant A", "Washed and Packaged")
     food_system.process_food_item("002", "Processing Plant B", "Ripe Stage Checked")
-
     
     robot1 = Robot(1, "Quality Check")
     robot2 = Robot(2, "Packaging")
-    
-    
+        
     food_system.log_robot_action(robot1, "001", {'location': "Processing Plant A"})
     food_system.log_robot_action(robot2, "002", {'location': "Processing Plant B"})
-    
-    
+        
     food_system.ship_food_item("001", "Warehouse A")
     food_system.ship_food_item("002", "Warehouse B")
-
-    
+ 
     food_system.receive_food_item("001", "Store A")
     food_system.receive_food_item("002", "Store B")
-
-    
+  
     food_system.blockchain.trace_food_item("001")
     food_system.blockchain.trace_food_item("002")
-
-   
+    
     food_system.generate_report()
-
-    
+   
     food_system.validate_integrity()
-
-    
+ 
     food_system.blockchain.create_new_block()
-
-    
+   
     food_system.blockchain.trace_food_item("001")
     food_system.blockchain.trace_food_item("002")
 
